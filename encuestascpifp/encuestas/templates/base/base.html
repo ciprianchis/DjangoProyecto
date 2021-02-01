@@ -1,0 +1,90 @@
+{% load static %}
+
+<!doctype html>
+<html lang="es" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Miguel y Ciprian">
+    <title>Encuestas</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'encuestas/css/bootstrap.min.css' %}"rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'encuestas/css/sticky-footer-navbar.css' %}"rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+    {% block header %}
+    <header>
+    <!-- Fixed navbar -->
+    {% if user.is_authenticated %}
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    {% block activar1 %}
+                    <li class="nav-item">
+                    {% endblock %}
+                        <a class="nav-link" href="{% url 'encuestas:index' %}">Preguntas</a>
+                    </li>
+        <!--
+                {% if user.is_superuser %}
+                    {% block activar2 %}
+                    <li class="nav-item">
+                    {% endblock %}
+                        <a class="nav-link" href="{% url 'encuestas:index' %}">Usuarios</a>
+                    </li>
+                    {% block activar3 %}
+                    <li class="nav-item">
+                    {% endblock %}
+                        <a class="nav-link" href="% url 'encuestas:index' %}">Categorías</a>
+                    </li>
+                {% endif %}
+        -->
+                </ul>
+                <h4 class="form-inline mt-2 mt-md-0 text-white">
+                    <strong>{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                </h4>
+                <form class="form-inline mt-2 mt-md-0" action = "{% url 'encuestas:logout' %}"method="get">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir</button>
+                </form>
+            </div>
+        </nav>
+    {% endif %}
+    </header>
+    {% endblock %}
+<!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">
+                {% block titulo %}
+                Encuestas CPIFP
+                {% endblock %}
+            </h1>
+            {% block contenido %}
+            <p class="lead">Contenido... </p>
+            {% endblock %}
+        </div>
+    </main>
+
+    {% block footer %}
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">Encuestas CPIFP---Miguel y Ciprian</span>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'encuestas/js/bootstrap.bundle.min.js' %}"></script>
+    {% block js %}
+
+    {% endblock %}
+  </body>
+</html>
+

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block activar1 %}
+    <li class="nav-item active">
+{% endblock %}
+
+{% block titulo %}
+    Preguntas disponibles
+{% endblock %}
+
+{% block contenido %}
+    <table class="tabletable-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Pregunta</th>
+                <th>Tipo pregunta</th>
+                
+                {% if user.is_superuser or pregunta.creador.user == user %}
+                <th>Acciones</th>
+                {%endif%}
+            </tr>
+        </thead>
+        <tbody>
+            {% if lista_preguntas %}
+            {% for pregunta in lista_preguntas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</a>
+                </td>
+                <td>
+                    {% for tipo_pregunta in pregunta.tipo_pregunta.all %}
+                        {{ tipo_pregunta }}
+                    {% endfor %}
+                </td>
+                
+                <td>
+                    {% if user.is_superuser or pregunta.creador.user == user %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'encuestas:index' %}#modificar">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="{%url 'encuestas:deletePregunta' pregunta.id %}">Borrar</a>
+                    {%endif%}
+                </td>
+            </tr>
+            {% endfor %}
+            
+            {% else %}
+            <h2 class="mt-5">No hay Preguntas</h2>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <hr id="modificar">
+    
+    {%  if user.is_superuser %}
+        <a  class="btn btn-primary" href="{%url 'encuestas:createPregunta'%}">Añadir pregunta</a>
+        
+    {% endif %}
+{% endblock %}
