@@ -40,9 +40,9 @@ def pregunta(request, id_pregunta):
 def opcion_pregunta(request, id_opc_pregunta):
     return HttpResponse("Opción: %s" % id_opc_pregunta)
 
-
 @login_required
 def pregunta_delete(request,id_pregunta):
+
     pregunta = Pregunta.objects.get(id=id_pregunta)
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -56,6 +56,7 @@ def pregunta_delete(request,id_pregunta):
 
 @login_required
 def pregunta_create(request):
+
     if not request.user.is_superuser:
         raise PermissionDenied
 
@@ -69,3 +70,22 @@ def pregunta_create(request):
         pregunta = Pregunta.objects.all()
         contexto = {'form':form,'pregunta':pregunta}
         return render(request,'encuestas/pregunta_create.html',contexto)
+
+@login_required
+def pregunta_update(request,id_pregunta):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    pregunta = Pregunta.objects.get(id=id_pregunta)
+    if request.method == "GET":
+        form = PreguntaForm(instance=pregunta)
+        preguntas = Pregunta.objects.all()
+        contexto = {'form':form,'preguntas':preguntas,'pregunta':pregunta}
+        return render(request,'encuestas/pregunta_update.html',contexto)
+    else:
+        form = PreguntaForm(request.POST,instance=pregunta)
+        if form.is_valid():
+            form.save()
+        return redirect('encuestas:index')
+
+    
