@@ -11,10 +11,10 @@
 {% block contenido %}
     <form action="{% url 'encuestas:index' %}" method="post">
         {% csrf_token %}
-        <p>
-            <input type="text"name="pregunta_a_crear"class="form-control"maxlength="200"required>
-        </p>
+        {{ form.as_p }}
+                
         <button class="btn btn-danger" type="submit">Añadir</button>
-        <!-- <a class="btn btn-default" href="{% url 'encuestas:index' %}">Cancelar</a>-->
+        
+        <a class="btn btn-default" href="{% url 'encuestas:index' %}">Cancelar</a>
     </form>
 {% endblock %}

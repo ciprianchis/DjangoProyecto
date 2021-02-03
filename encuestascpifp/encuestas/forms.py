@@ -31,6 +31,6 @@ class PreguntaForm(forms.ModelForm):
         }
 
         widgets = {
-            'pregunta':forms.TextInput(attrs={'class':'form-control'}),
+            'pregunta':forms.TextInput(attrs={'class':'form-control','required':'True'}),
             'tipo_pregunta':forms.Select(attrs={'class':'form-control','required':'True'}),
         }

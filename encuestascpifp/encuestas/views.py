@@ -60,8 +60,12 @@ def pregunta_create(request):
         raise PermissionDenied
 
     if request.method =='POST':
+        form = PreguntaForm(request.POST)
+        if form.is_valid():
+            form.save()
         return redirect('encuestas:index')
     else:
+        form = PreguntaForm()
         pregunta = Pregunta.objects.all()
-        contexto = {'pregunta':pregunta}
+        contexto = {'form':form,'pregunta':pregunta}
         return render(request,'encuestas/pregunta_create.html',contexto)
