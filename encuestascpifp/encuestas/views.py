@@ -78,6 +78,7 @@ def pregunta_update(request,id_pregunta):
 
     pregunta = Pregunta.objects.get(id=id_pregunta)
     if request.method == "GET":
+        pregunta.delete()
         form = PreguntaForm(instance=pregunta)
         preguntas = Pregunta.objects.all()
         contexto = {'form':form,'preguntas':preguntas,'pregunta':pregunta}
