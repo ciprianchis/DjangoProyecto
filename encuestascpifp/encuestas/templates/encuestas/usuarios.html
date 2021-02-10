@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block activar2 %}
+    <li class="nav-itemactive">
+{% endblock %}
+
+
+{% block titulo %}
+    Usuarios
+{% endblock %}
+
+
+{% block contenido %}
+    <table class="tabletable-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if usuarios %}
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ usuario.user }}</td>
+            </tr>
+            {% endfor %}
+
+            {% else %}
+            <h2 class="mt-5">No hay Usuarios</h2>
+            {% endif %}
+            </tbody>
+            </table>
+            <a  class="btn btn-primary" href="{%url 'encuestas:createUsuario'%}">Añadir usuario</a>
+            {% endif %}
+
+{% endblock %}

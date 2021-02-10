@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Pregunta
+from .models import Pregunta, Usuario, User
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -8,7 +8,7 @@ from django.core.exceptions import PermissionDenied
 
 from django.utils import timezone
 
-from .forms import PreguntaForm
+from .forms import PreguntaForm, UsuarioForm
 
 @login_required
 def index(request):
@@ -78,7 +78,7 @@ def pregunta_update(request,id_pregunta):
 
     pregunta = Pregunta.objects.get(id=id_pregunta)
     if request.method == "GET":
-        pregunta.delete()
+        #pregunta.delete()#con esta linea funciona boton modificar y no lo hace cancelar / sin ella funciona cancelar y no lo hace modificar
         form = PreguntaForm(instance=pregunta)
         preguntas = Pregunta.objects.all()
         contexto = {'form':form,'preguntas':preguntas,'pregunta':pregunta}
@@ -87,6 +87,31 @@ def pregunta_update(request,id_pregunta):
         form = PreguntaForm(request.POST,instance=pregunta)
         if form.is_valid():
             form.save()
+            pregunta.delete()
         return redirect('encuestas:index')
 
+
+@login_required
+def usuarios(request,user): 
+    usuario = get_object_or_404(User, pk=user)
+    return render(request,'encuestas/usuarios.html',{'usuario':usuario})
+
+@login_required
+def usuario_create(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    if request.method =='POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('encuestas:index')
     
+   # if request.POST["Cancelar"]:
+    #    return redirect('encuestas:index')
+
+    else:
+        form = UsuarioForm()
+        usuario = Usuario.objects.all()
+        contexto = {'form':form,'usuario':usuario}
+        return render(request,'encuestas/usuario_create.html',contexto)
+

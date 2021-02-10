@@ -1,7 +1,7 @@
 from django import forms
 from .models import Pregunta, Usuario, Tipo_Pregunta, Opcion_Pregunta, User
 
-class UsuarioForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     
     class Meta:
 
@@ -9,10 +9,12 @@ class UsuarioForm(forms.ModelForm):
 
         fields = [
             'user',
+            'password'
         ]
 
         widgets = {
-            'user':forms.TextInput(attrs={'class':'form-control'})
+            'user':forms.TextInput(attrs={'class':'form-control','autocomplete':'Nombre del usuario', 'required':'True'}),
+            'password':forms.PasswordInput(attrs={'class':'form-control','autocomplete':'Añadir contraseña', 'required':'True'})
         }
 
 class PreguntaForm(forms.ModelForm):
@@ -33,4 +35,19 @@ class PreguntaForm(forms.ModelForm):
         widgets = {
             'pregunta':forms.TextInput(attrs={'class':'form-control','required':'True'}),
             'tipo_pregunta':forms.Select(attrs={'class':'form-control','required':'True'}),
+        }
+class UsuarioForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Usuario
+
+        fields = [
+            'nombre_completo',
+        ]
+        labels = {
+            'nombre_completo':'Usuario',
+        }
+        widgets = {
+            'nombre_completo':forms.TextInput(attrs={'class':'form-control','required':'True'})
         }

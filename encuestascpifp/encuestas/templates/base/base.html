@@ -32,20 +32,20 @@
                     {% endblock %}
                         <a class="nav-link" href="{% url 'encuestas:index' %}">Preguntas</a>
                     </li>
-        <!--
-                {% if user.is_superuser %}
+        
+               {% if user.is_superuser %}
                     {% block activar2 %}
                     <li class="nav-item">
                     {% endblock %}
-                        <a class="nav-link" href="{% url 'encuestas:index' %}">Usuarios</a>
+                        <a class="nav-link" href="{% url 'encuestas:usuarios' %}">Usuarios</a>
                     </li>
+                    <!-- 
                     {% block activar3 %}
                     <li class="nav-item">
                     {% endblock %}
                         <a class="nav-link" href="% url 'encuestas:index' %}">Categorías</a>
                     </li>
-                {% endif %}
-        -->
+                {% endif %}-->
                 </ul>
                 <h4 class="form-inline mt-2 mt-md-0 text-white">
                     <strong>{{ user }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
