@@ -78,7 +78,7 @@ def pregunta_update(request,id_pregunta):
 
     pregunta = Pregunta.objects.get(id=id_pregunta)
     if request.method == "GET":
-        #pregunta.delete()#con esta linea funciona boton modificar y no lo hace cancelar / sin ella funciona cancelar y no lo hace modificar
+        pregunta.delete()
         form = PreguntaForm(instance=pregunta)
         preguntas = Pregunta.objects.all()
         contexto = {'form':form,'preguntas':preguntas,'pregunta':pregunta}
@@ -87,7 +87,6 @@ def pregunta_update(request,id_pregunta):
         form = PreguntaForm(request.POST,instance=pregunta)
         if form.is_valid():
             form.save()
-            pregunta.delete()
         return redirect('encuestas:index')
 
 
