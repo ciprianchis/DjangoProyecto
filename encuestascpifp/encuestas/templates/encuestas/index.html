@@ -13,31 +13,55 @@
     <table class="tabletable-sm">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Pregunta</th>
-                <th>Tipo pregunta</th>
-                
-                {% if user.is_superuser or pregunta.creador.user == user %}
+
+                <th>Enunciado pregunta</th>
+                {% if not user.is_superuser %}
+                <th></th>
+                {% endif %}
+
+                {% if user.is_superuser%}
                 <th>Acciones</th>
                 {%endif%}
+
+                {% if lista_preguntas %}
+                {% for pregunta in lista_preguntas %}
             </tr>
         </thead>
         <tbody>
-            {% if lista_preguntas %}
-            {% for pregunta in lista_preguntas %}
+
             <tr>
-                <td>{{ forloop.counter }}</td>
                 <td>
-                    <a href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</a>
+                    <span href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</span>
                 </td>
-                <td>
-                    {% for tipo_pregunta in pregunta.tipo_pregunta.all %}
-                        {{ tipo_pregunta }}
-                    {% endfor %}
+                <td>     
+                     
+                    {% if pregunta.tipo_pregunta.tipo == "Radio" %}
+                    
+                        <form action="{% url 'encuestas:index' %}" method="post">
+                            
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input id="1" name="opc" type="radio" value="pt">
+                            <input id="2" name="opc" type="radio" value="pt">
+                            <input id="3" name="opc" type="radio" value="pt">
+                            <input id="4" name="opc" type="radio" value="pt">
+                            <input id="5" name="opc" type="radio" value="pt">
+                            <input id="6" name="opc" type="radio" value="pt">
+                            <input id="7" name="opc" type="radio" value="pt">
+                            <input id="8" name="opc" type="radio" value="pt">
+                            <input id="9" name="opc" type="radio" value="pt">
+                            <input id="10" name="opc" type="radio" value="pt">
+                        </form>
+                    {%endif%}
+                    {% if pregunta.tipo_pregunta.tipo == "Texto" %}
+                        <input type="text" placeholder="Introduzca comentarios aquí" id="texto1">
+                    {%endif%}
+                    
+                
                 </td>
                 
                 <td>
-                    {% if user.is_superuser or pregunta.creador.user == user %}
+                    {% if user.is_superuser %}
                     <a class="btn btn-primary btn-sm" href="{% url 'encuestas:updatePregunta' pregunta.id %} ">Editar</a>
                     <a class="btn btn-danger btn-sm" href="{%url 'encuestas:deletePregunta' pregunta.id %}">Borrar</a>
                     {%endif%}

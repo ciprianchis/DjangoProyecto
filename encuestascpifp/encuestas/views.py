@@ -114,3 +114,39 @@ def usuario_create(request):
         contexto = {'form':form,'usuario':usuario}
         return render(request,'encuestas/usuario_create.html',contexto)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+@login_required
+def votar (request, pregunta_id):
+    Pregunta = get_object_or_404 (Pregunta, pk = pregunta_id)
+    form = ChoiceCommentForm (request.POST or None)
+    try:
+        opcion_seleccionada = pregunta.opcion_set.get (pk = request.POST ['opcion'])
+    except (KeyError, Choice.DoesNotExist):
+        return render (request, '', {
+            'pregunta': pregunta,
+            'error_message': "Seleccione una opcion",
+        })
+    else:
+        selected_choice.votes + = 1
+        selected_choice.save ()
+        form.save ()
+        context = {
+        'comment_ichiran': selected_choice,
+        }
+        return HttpResponseRedirect (reverse ('polls: results', args = (question.id,)), context)
+        
+'''
+        

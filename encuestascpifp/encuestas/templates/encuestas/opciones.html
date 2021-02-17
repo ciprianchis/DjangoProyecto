@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block activar1 %}
+    <li class="nav-itemactive">
+{% endblock %}
+
+{% block titulo %}
+
+{% endblock %}
+
+{% block contenido %}
+    <form action="{% url 'encuestas:index' %}" method="post">
+        {% csrf_token %}
+        <!--{{ form.as_p }}-->
+
+        
+                
+        <button class="btn btn-danger" type="submit">Enviar</button>
+    </form>
+{% endblock %}

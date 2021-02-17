@@ -51,3 +51,19 @@ class UsuarioForm(forms.ModelForm):
         widgets = {
             'nombre_completo':forms.TextInput(attrs={'class':'form-control','required':'True'})
         }
+
+class OpcionPreguntaTextForm(forms.ModelForm):
+ 
+    class Meta:
+
+        model = Opcion_Pregunta
+
+        fields = [
+            'opcion',
+        ]
+        labels={
+            'opcion':'Opcion_Pregunta',
+        }
+        widgets = {
+            'opcion':forms.TextInput(attrs={'class':'form-control'})
+        }
