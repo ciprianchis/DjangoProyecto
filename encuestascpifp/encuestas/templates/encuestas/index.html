@@ -16,7 +16,8 @@
 
                 <th>Enunciado pregunta</th>
                 {% if not user.is_superuser %}
-                <th></th>
+               
+                <th>Respuesta</th>
                 {% endif %}
 
                 {% if user.is_superuser%}
@@ -27,36 +28,55 @@
                 {% for pregunta in lista_preguntas %}
             </tr>
         </thead>
-        <tbody>
+        <tbody aria-rowspan="2">
 
             <tr>
                 <td>
                     <span href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</span>
                 </td>
-                <td>     
-                     
+                <td colspan="10">     
+                    {% if not user.is_superuser %}
                     {% if pregunta.tipo_pregunta.tipo == "Radio" %}
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                   
+
                     
                         <form action="{% url 'encuestas:index' %}" method="post">
                             
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <input id="1" name="opc" type="radio" value="pt">
-                            <input id="2" name="opc" type="radio" value="pt">
-                            <input id="3" name="opc" type="radio" value="pt">
-                            <input id="4" name="opc" type="radio" value="pt">
-                            <input id="5" name="opc" type="radio" value="pt">
-                            <input id="6" name="opc" type="radio" value="pt">
-                            <input id="7" name="opc" type="radio" value="pt">
-                            <input id="8" name="opc" type="radio" value="pt">
-                            <input id="9" name="opc" type="radio" value="pt">
-                            <input id="10" name="opc" type="radio" value="pt">
+                        
+                            <tbody>
+                                <td colspan="10"></td>
+                                <td ></td>
+                                <td style="width: 16px;"><input id="1" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="2" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="3" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="4" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="5" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="6" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="7" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="8" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="9" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;"><input id="10" name="opc" type="radio" value="pt"></td>
+                            </tbody>                            
                         </form>
                     {%endif%}
                     {% if pregunta.tipo_pregunta.tipo == "Texto" %}
-                        <input type="text" placeholder="Introduzca comentarios aquí" id="texto1">
+                    <td colspan="10">
+                        <input type="text" placeholder="Introduzca comentarios aquí" id="texto1" style="width: 225px;">
+                    </td>
                     {%endif%}
-                    
+                    {% endif %}
                 
                 </td>
                 
