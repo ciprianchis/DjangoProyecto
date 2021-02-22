@@ -7,10 +7,32 @@
 {% endblock %}
 {% block contenido %}
     {% if user.is_authenticated %}
-        <br><br><br><br>
+        {% if user.is_superuser %}
+        <br><br>
         <p class="lead">
-            Bienvenido {{ user }}
+            Bienvenido {{ user }}, seleccione un apartado de la cabecera o presione un botón
         </p>
+        <div style="display: inline;">
+            <form class="text-center"action="{% url 'encuestas:index'%}"method="post">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary"type="submit">Acceso a preguntas</button>
+            </form>
+            <form class="text-center"action="{% url 'encuestas:usuarios'%}"method="post">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary"type="submit">Usuarios</button>
+            </form> 
+        </div>
+        {% else %}
+        <br><br>
+        <p class="lead">
+            Bienvenido {{ user }}, seleccione un apartado de la cabecera o presione un botón
+        </p>
+        <div style="display: inline;">
+            <form class="text-center"action="{% url 'encuestas:index'%}"method="post">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary"type="submit">Acceso a preguntas</button>
+            </form>
+        {% endif %}
     {% else %}
         {% if form.errors %}    
             <p class="text-danger text-center">
