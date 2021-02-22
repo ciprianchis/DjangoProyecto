@@ -28,26 +28,15 @@
                 {% for pregunta in lista_preguntas %}
             </tr>
         </thead>
-        <tbody aria-rowspan="2">
+        <tbody>
 
             <tr>
-                <td>
-                    <span href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</span>
+                <td colspan="10">
+                    <span aria-rowspan="2" href="{% url 'encuestas:index' %}">{{pregunta.pregunta}}</span>
                 </td>
-                <td colspan="10">     
+                <td >     
                     {% if not user.is_superuser %}
-                    {% if pregunta.tipo_pregunta.tipo == "Radio" %}
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                   
+                    {% if pregunta.tipo_pregunta.tipo == "Radio" %}              
 
                     
                         <form action="{% url 'encuestas:index' %}" method="post">
@@ -58,16 +47,16 @@
                             <tbody>
                                 <td colspan="10"></td>
                                 <td ></td>
-                                <td style="width: 16px;"><input id="1" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="2" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="3" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="4" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="5" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="6" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="7" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="8" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="9" name="opc" type="radio" value="pt"></td>
-                                <td style="width: 16px;"><input id="10" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">1 <input id="1" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">2 <input id="2" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">3 <input id="3" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">4 <input id="4" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">5 <input id="5" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">6 <input id="6" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">7 <input id="7" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">8 <input id="8" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">9 <input id="9" name="opc" type="radio" value="pt"></td>
+                                <td style="width: 16px;">10 <input id="10" name="opc" type="radio" value="pt"></td>
                             </tbody>                            
                         </form>
                     {%endif%}

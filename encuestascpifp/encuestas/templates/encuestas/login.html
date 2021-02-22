@@ -3,34 +3,37 @@
 {% load static %}
 
 {% block titulo %}
-    Encuestas CPIFP Bajo Aragon
+<h1 style="text-align: center;">Encuestas CPIFP Bajo Aragon</h1>
+    
 {% endblock %}
 {% block contenido %}
     {% if user.is_authenticated %}
         {% if user.is_superuser %}
         <br><br>
-        <p class="lead">
+        <p class="lead" style="text-align: center;">
             Bienvenido {{ user }}, seleccione un apartado de la cabecera o presione un botón
         </p>
-        <div style="display: inline;">
-            <form class="text-center"action="{% url 'encuestas:index'%}"method="post">
+
+        <!--Poner centrado-->
+        <div style="text-align: center;">
+            <form style="display: inline"  class="text-center"action="{% url 'encuestas:index'%}"method="post">
                 {% csrf_token %}
                 <button class="btn btn-lg btn-primary"type="submit">Acceso a preguntas</button>
             </form>
-            <form class="text-center"action="{% url 'encuestas:usuarios'%}"method="post">
+            <form style="display: inline" class="text-center"action="{% url 'encuestas:usuarios'%}"method="post">
                 {% csrf_token %}
-                <button class="btn btn-lg btn-primary"type="submit">Usuarios</button>
+                <button class="btn btn-lg btn-primary"type="submit" >Usuarios</button>
             </form> 
         </div>
         {% else %}
         <br><br>
-        <p class="lead">
+        <p class="lead" style="text-align: center;">
             Bienvenido {{ user }}, seleccione un apartado de la cabecera o presione un botón
         </p>
         <div style="display: inline;">
             <form class="text-center"action="{% url 'encuestas:index'%}"method="post">
                 {% csrf_token %}
-                <button class="btn btn-lg btn-primary"type="submit">Acceso a preguntas</button>
+                <button class="btn btn-lg btn-primary"type="submit">Acceso a encuestas</button>
             </form>
         {% endif %}
     {% else %}
