@@ -91,6 +91,10 @@ def pregunta_update(request,id_pregunta):
 
 
 @login_required
+def enviado(request):
+    return render(request,'encuestas/respuestaEnviada.html')
+
+@login_required
 def usuarios(request,user): 
     usuario = get_object_or_404(User, pk=user)
     return render(request,'encuestas/usuarios.html',{'usuario':usuario})

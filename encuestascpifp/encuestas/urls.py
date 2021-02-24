@@ -20,7 +20,8 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 
 
-    path('usuario/',views.usuarios,name="usuarios")
+    path('usuario/',views.usuarios,name="usuarios"),
+    path('agradecimiento/',views.enviado,name="enviado")
     #path('pregunta/',views.pregunta_create,name='pregunta'),
     
 ]
