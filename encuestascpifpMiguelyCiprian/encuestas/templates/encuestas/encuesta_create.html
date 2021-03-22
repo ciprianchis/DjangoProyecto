@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block activar1 %}
+    <li class="nav-itemactive">
+{% endblock %}
+
+{% block titulo %}
+    <h3 class="mt-5"> ¿Qué encuesta desea añadir?</h3>
+{% endblock %}
+
+{% block contenido %}
+    <form action="{% url 'encuestas:encuestas' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+                
+        <button class="btn btn-danger" type="submit">Añadir</button>
+        
+        <a class="btn btn-default" href="{% url 'encuestas:encuestas' %}">Cancelar</a>
+    </form>
+{% endblock %}

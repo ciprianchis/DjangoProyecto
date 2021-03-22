@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block activar1 %}
+    <li class="nav-item active">
+{% endblock %}
+
+{% block titulo %}
+    Encuestas disponibles
+{% endblock %}
+
+{% block contenido %}
+<body style="width: 80%; height: 100%;">
+    <table class="tabletable-sm">
+        <thead>
+            <tr>
+                
+                <th>Encuesta</th>
+                
+                {% if user.is_superuser%}
+                <th>Acciones</th>
+                {%endif%}
+
+                {% if lista_encuestas %}
+                {% for encuesta in lista_encuestas %}
+            </tr>
+        </thead>
+        <tbody style="font-size: 20px;">
+
+            <tr>
+                <td>
+                    
+                    <span>{{Encuestas_Pregunta.nombre}}</span>
+                    
+                </td>
+                <td>
+                    {% if user.is_superuser %}
+                    <a class="btn btn-primary btn-sm" href="#">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="#">Borrar</a>
+                    {%endif%}
+                </td>
+            </tr>
+            {% endfor %}
+            
+            {% else %}
+            <h2 class="mt-5">No hay Encuestas</h2>
+            {% endif %}
+        </tbody>
+    </table>
+
+
+    <br>
+    
+    {%  if user.is_superuser %}
+        <a  class="btn btn-primary" href="{% url 'encuestas:encuestaCreate' %}">Añadir encuesta</a><!--Añadir createEncuesta-->
+        
+    {% endif %}
+</body>
+{% endblock %}
+    

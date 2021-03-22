@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block activar1 %}
+    <li class="nav-item active">
+{% endblock %}
+
+{% block titulo %}
+    Usuarios de la aplicación
+{% endblock %}
+
+{% block contenido %}
+<body style="width: 80%; height: 100%;">
+    <table class="tabletable-sm">
+        <thead>
+            <tr>
+                
+                <th>Usuario</th>
+                
+                {% if user.is_superuser%}
+                <th>Acciones</th>
+                {%endif%}
+
+                {% if lista_usuarios %}
+                {% for user in lista_usuarios %}
+            </tr>
+        </thead>
+        <tbody style="font-size: 20px;">
+
+            <tr>
+                <td>
+                    
+                    <span>{{user.username}}</span>
+                    
+                </td>
+                <td>
+                    {% if user.is_superuser %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'encuestas:updatePregunta' user.id %} "> <!--Añadir updateUser-->Editar</a>
+                    <a class="btn btn-danger btn-sm" href="{%url 'encuestas:deletePregunta' user.id %}"><!--Añadir eliminarUser-->Borrar</a>
+                    {%endif%}
+                </td>
+            </tr>
+            {% endfor %}
+            
+            {% else %}
+            <h2 class="mt-5">No hay usuarios</h2>
+            {% endif %}
+        </tbody>
+    </table>
+
+
+    <br>
+    
+    {%  if user.is_superuser %}
+        <a  class="btn btn-primary" href="{%url 'encuestas:createPregunta'  %}">Añadir usuario</a><!--Añadir createUser-->
+        
+    {% endif %}
+</body>
+{% endblock %}
+    
